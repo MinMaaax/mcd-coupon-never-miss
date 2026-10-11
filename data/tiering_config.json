@@ -1,0 +1,91 @@
+{
+  "_comment": "麦麦省心分级配置。改这里就能调整分级口味，不需要动代码。",
+  "weights": {
+    "_comment": "四维权重。分母自动求和，改数值即可调整偏向。",
+    "saving": 1.2,
+    "category": 0.8,
+    "discount": 0.6,
+    "channel": 0.4
+  },
+  "categoryScores": {
+    "_comment": "品类价值分。套餐/汉堡 > 饮品 > 小食 > 甜点 > 酱料",
+    "combo": 1.0,
+    "burger": 0.8,
+    "drink": 0.6,
+    "side": 0.4,
+    "dessert": 0.3,
+    "sauce": 0.15,
+    "unknown": 0.5
+  },
+  "savingCap": 30.0,
+  "_savingCap_comment": "省满 30 元即拿满分。想让大额券拉开差距就调高这个值。",
+  "grades": [
+    { "grade": "S", "label": "极品券", "min": 0.78 },
+    { "grade": "A", "label": "精品券", "min": 0.5 },
+    { "grade": "B", "label": "普通券", "min": 0.35 },
+    { "grade": "C", "label": "渣渣券", "min": 0.0 }
+  ],
+  "freeCoupon": {
+    "_comment": "0 元券（免费券）硬规则：命中即直接锁定等级，不参与加权打分。",
+    "_why": "「免费」是独立性质，不该被金额分稀释——0 元大米派省的钱虽少，但不花钱拿到本身就强过任何折扣券。该规则不依赖原价基线，原价未知也照样判极品。",
+    "enabled": true,
+    "forceGrade": "S",
+    "forceScore": 1.0
+  },
+  "urgencyDays": {
+    "_comment": "剩余天数分档。提醒只对 S 级、且进入 critical/high 的券触发。",
+    "critical": 1,
+    "high": 3,
+    "medium": 7
+  },
+  "priceBaseline": {
+    "_comment": "原价基线，仅用于估算「省了多少钱」。条目可选带 category 字段做品类约束。",
+    "entries": [
+      { "match": "巨无霸", "price": 25.0, "category": "burger" },
+      { "match": "安格斯", "price": 32.0, "category": "burger" },
+      { "match": "麦辣鸡腿堡", "price": 22.0, "category": "burger" },
+      { "match": "板烧鸡腿堡", "price": 22.0, "category": "burger" },
+      { "match": "厚松饼", "price": 12.0, "category": "burger" },
+      { "match": "麦香鱼", "price": 18.0, "category": "burger" },
+      { "match": "双吉", "price": 20.0, "category": "burger" },
+      { "match": "月堡", "price": 25.0, "category": "burger" },
+
+      { "match": "四件套", "price": 45.0, "category": "combo" },
+      { "match": "三件套", "price": 40.0, "category": "combo" },
+      { "match": "两件套", "price": 25.0, "category": "combo" },
+      { "match": "套餐", "price": 35.0, "category": "combo" },
+
+      { "match": "麦乐鸡", "price": 12.0, "category": "side" },
+      { "match": "大薯条", "price": 15.0, "category": "side" },
+      { "match": "中薯条", "price": 13.0, "category": "side" },
+      { "match": "薯饼", "price": 7.0, "category": "side" },
+      { "match": "鸡块", "price": 12.0, "category": "side" },
+      { "match": "鸡翅", "price": 14.0, "category": "side" },
+      { "match": "玉米", "price": 8.0, "category": "side" },
+
+      { "match": "麦旋风", "price": 14.0, "category": "dessert" },
+      { "match": "圆筒", "price": 9.0, "category": "dessert" },
+      { "match": "冰淇淋", "price": 9.0, "category": "dessert" },
+      { "match": "新地", "price": 12.0, "category": "dessert" },
+      { "match": "派", "price": 8.0, "category": "dessert" },
+
+      { "match": "麦咖啡奶铁", "price": 20.0, "category": "drink" },
+      { "match": "麦咖啡美式", "price": 17.0, "category": "drink" },
+      { "match": "奶铁", "price": 20.0, "category": "drink" },
+      { "match": "拿铁", "price": 20.0, "category": "drink" },
+      { "match": "美式", "price": 17.0, "category": "drink" },
+      { "match": "可乐", "price": 9.0, "category": "drink" },
+      { "match": "雪碧", "price": 9.0, "category": "drink" }
+    ],
+    "byCategory": {
+      "_comment": "关键词都没命中时，按品类给的兜底原价",
+      "combo": 32.0,
+      "burger": 24.0,
+      "drink": 18.0,
+      "side": 13.0,
+      "dessert": 12.0,
+      "sauce": 3.0,
+      "unknown": 18.0
+    }
+  }
+}
